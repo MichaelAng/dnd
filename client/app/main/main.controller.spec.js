@@ -4,6 +4,7 @@ describe('Controller: MainCtrl', function () {
 
   // load the controller's module
   beforeEach(module('dndApp'));
+  beforeEach(module('dnd.templates'));
 
   var MainCtrl,
       scope,

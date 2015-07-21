@@ -40,14 +40,15 @@ module.exports = function(config) {
     },
 
     ngHtml2JsPreprocessor: {
-      stripPrefix: 'client/'
+      stripPrefix: 'client/',
+      moduleName: 'dnd.templates'
     },
 
     ngJade2JsPreprocessor: {
       stripPrefix: 'client/'
     },
 
-    
+
 
     // list of files / patterns to exclude
     exclude: [],

@@ -6,6 +6,9 @@ angular.module('dndApp')
       'title': 'Home',
       'link': '/'
     }, {
+      'title': 'Character Creation',
+      'link': '/create'
+    }, {
       'title': 'About',
       'link': '/about'
     }];

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('CharacterCreationCtrl', function ($scope) {
+  .controller('CharacterCreationCtrl', ['$scope', function ($scope) {
+
     $scope.abilities = [
         {name: 'Strength', nameAbbr: 'Str', score: 10},
         {name: 'Dexterity', nameAbbr: 'Dex', score: 10},
@@ -11,4 +12,4 @@ angular.module('dndApp')
         {name: 'Charisma', nameAbbr: 'Cha', score: 10},
     ];
 
-  });
+  }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('CharacterCreationCtrl', function ($scope) {
+  .controller('CharacterCreationCtrl', ['$scope', function ($scope) {
     $scope.pointsRemaining = 27;
     $scope.abilities = [
       {name: 'Strength', nameAbbr: 'Str', points: 8},
@@ -30,4 +30,5 @@ angular.module('dndApp')
       }
     };
     $scope.constructSelects();
-});
+  }
+]);

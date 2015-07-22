@@ -1,29 +1,24 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<!-- Ability Score Sidebar -->
+<!-- Ability Score -->
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-    {{pointsRemaining}}
-      <ul class="list-group">
-        <li class="list-group-item">
-            <span class="">Stat</span>
-            <span class="">Score</span>
-            <span class="">Modifier</span>
-        </li>
-        <li class="list-group-item" ng-repeat="ability in abilities">
-            <span class="">{{ability.name}}</span>
-            <span class="">{{value}}</span>
-            <span class="">{{(ability.points - 10)/2}}</span>
-            <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="fixOtherPoints(ability.name)"></select>
-        </li>
-      </ul>
-      <!--   <label>Point value:
-    <select ng-model="myPoints" ng-options="color.cost as color.points for color in colors"></select>
-  </label><br/>
+      {{pointsRemaining}}
+      <!-- ability-score-row -->
+      <div class="ability-score-row" ng-repeat="ability in abilities">
+        <div class="col-xs-4 well">
+          {{ability.name}}
+        </div>
 
-  Cost: {{ myPoints}}
- -->
+        <div class="col-xs-4 well text-center">
+          <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="fixOtherPoints(ability.name)"></select>
+        </div>
+
+        <div class="col-xs-4 well text-center">
+          {{(ability.points - 10)/2}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

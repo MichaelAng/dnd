@@ -1,10 +1,18 @@
 'use strict';
 
+/*
+  Ability Score Modifier:
+  Takes in a ability score and converts it into a ability score modifier.
+
+  To Use: $filter(asModifier)(input, true);
+
+*/
+
 angular.module('dndApp')
-  .filter('asModifier', function () {
+  .filter('asModifier', [function () {
     return function (input, includeSign) {
 
-      // filters out intergers only
+      // Converts to intergers if possible
       var value = (parseInt(input));
       if (isNaN(value)){
         return 0;
@@ -16,9 +24,9 @@ angular.module('dndApp')
 
       // Applies +/- sign
       if (includeSign) {
-        value = (value > 0) ? ('+' + value) : value.toString();
+        value = (value >= 0) ? ('+' + value) : value.toString();
       }
 
       return value;
     };
-  });
+  }]);

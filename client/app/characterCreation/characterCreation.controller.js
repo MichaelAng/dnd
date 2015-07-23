@@ -11,16 +11,8 @@ angular.module('dndApp')
       {name: 'Wisdom', nameAbbr: 'Wis', points: 8},
       {name: 'Charisma', nameAbbr: 'Cha', points: 8},
     ];
-    $scope.standardPoints = [
-      {points: 8, cost:0},
-      {points: 9, cost:1},
-      {points: 10, cost:2},
-      {points: 11, cost:3},
-      {points: 12, cost:4},
-      {points: 13, cost:5},
-      {points: 14, cost:7},
-      {points: 15, cost:9}
-    ];
+    //Cost to get points based on abilityPointValue - 8
+    $scope.standardPoints = [0,1,2,3,4,5,7,9];
 
     $scope.constructSelects = function () {
       if ($scope.pointsRemaining >= 9) {
@@ -30,5 +22,17 @@ angular.module('dndApp')
       }
     };
     $scope.constructSelects();
+
+    $scope.getCost = function (abilityPointValue) {
+      return $scope.standardPoints[abilityPointValue - 8];
+    };
+
+    $scope.recalculatePoints = function () {
+      var subtrahend = 0;
+      angular.forEach($scope.abilities, function (ability) {
+        subtrahend += $scope.getCost(ability.points);
+      });
+      $scope.pointsRemaining = 27 - subtrahend;
+    };
   }
 ]);

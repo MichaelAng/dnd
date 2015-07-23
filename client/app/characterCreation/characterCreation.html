@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-xs-4 well text-center">
-          <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="fixOtherPoints(ability.name)"></select>
+          <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="recalculatePoints()"></select>
         </div>
 
         <div class="col-xs-4 well text-center">

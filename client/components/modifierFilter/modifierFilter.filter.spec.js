@@ -13,7 +13,7 @@ describe('modifierFilter.filter.spec.js: ', function () {
   it('should convert the ability score to a modifier with plus sign; sign = true', function () {
     expect(modifierFilter(10, true)).toBe('+0');
     expect(modifierFilter(12, true)).toBe('+1');
-    expect(modifierFilter(15, true)).toBe('+2');g
+    expect(modifierFilter(15, true)).toBe('+2');
   });
 
   it('should convert the ability score to a modifier with minus sign; sign = true', function () {

@@ -4,36 +4,26 @@ describe('quantify.filter.spec.js: ', function () {
 
   beforeEach(module('dndApp'));
 
-  var modifierFilter;
+  var quantifyFilter;
 
   beforeEach(inject(function ($filter) {
-    modifierFilter = $filter('quantify');
+    quantifyFilter = $filter('quantify');
   }));
 
-  it('should pluralize upon a value greater than 1', function () {
-    expect(modifierFilter(13, true)).toBe('+1');
-    expect(modifierFilter(14, true)).toBe('+2');
-    expect(modifierFilter(15, true)).toBe('+2');
+  it('should print the number followed by a space, the word, and an S, upon a value greater than 1', function () {
+    expect(quantifyFilter(2, 'post')).toBe('2 posts');
+    expect(quantifyFilter(3, 'mike')).toBe('3 mikes');
+    expect(quantifyFilter(4, 'point')).toBe('4 points');
   });
 
-  it('should convert the ability score to a modifier with minus sign; sign = true', function () {
-    expect(modifierFilter(5, true)).toBe('-3');
-    expect(modifierFilter(6, true)).toBe('-2');
-    expect(modifierFilter(7, true)).toBe('-2');
+  it('should print 0 followed by a space, the word, and an S, upon NaN or 0', function () {
+    expect(quantifyFilter('test', 'post')).toBe('0 posts');
+    expect(quantifyFilter(undefined, 'mike')).toBe('0 mikes');
+    expect(quantifyFilter(null, 'point')).toBe('0 points');
+    expect(quantifyFilter(0, 'point')).toBe('0 points');
   });
 
-  it('should convert the ability score to a modifier with no sign; sign = false', function () {
-    expect(modifierFilter(17, false)).toBe(3);
+  it('should print 0 followed by a space and the word upon 1', function () {
+    expect(quantifyFilter(1, 'point')).toBe('1 point');
   });
-
-  it('should convert the ability score to a modifier with no sign; sign = undefined', function () {
-    expect(modifierFilter(17)).toBe(3);
-  });
-
-  it('should return 0 when the input is NaN, null, or undefined', function () {
-    expect(modifierFilter('snail')).toBe(0);
-    expect(modifierFilter(null)).toBe(0);
-    expect(modifierFilter()).toBe(0);
-  });
-
 });

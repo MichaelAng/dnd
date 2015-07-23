@@ -5,8 +5,9 @@
   <div class="row">
     <div class="col-lg-12">
       {{pointsRemaining}}
+
       <!-- ability-score-row -->
-      <div class="ability-score-row" ng-repeat="ability in abilities">
+      <div class="ability-score-row row" ng-repeat="ability in abilities">
         <div class="col-xs-4 well">
           {{ability.name}}
         </div>
@@ -19,6 +20,7 @@
           {{(ability.points - 10)/2}}
         </div>
       </div>
+
     </div>
   </div>
 </div>

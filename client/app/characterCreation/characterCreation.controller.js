@@ -25,7 +25,7 @@ angular.module('dndApp')
     $scope.constructSelects = function () {
       if ($scope.pointsRemaining >= 9) {
         angular.forEach($scope.abilities, function (ability) {
-          ability.selectable = _.range(8, 16)
+          ability.selectable = _.range(8, 16);
         });
       }
     };

@@ -13,7 +13,12 @@
         </div>
 
         <div class="col-xs-4 well text-center">
-          <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="recalculatePoints()"></select>
+          <div class="form-group pull-left">
+            <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="recalculatePoints()"></select>
+          </div>
+          <div class="pull-right">
+            Cost: {{getCost(ability.points) | quantify: 'point'}}
+          </div>
         </div>
 
         <div class="col-xs-4 well text-center">

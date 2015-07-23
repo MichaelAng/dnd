@@ -1,0 +1,26 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<!-- Ability Score -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      {{pointsRemaining}}
+
+      <!-- ability-score-row -->
+      <div class="ability-score-row row" ng-repeat="ability in abilities">
+        <div class="col-xs-4 well">
+          {{ability.name}}
+        </div>
+
+        <div class="col-xs-4 well text-center">
+          <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="recalculatePoints()"></select>
+        </div>
+
+        <div class="col-xs-4 well text-center">
+          {{ability.points | asModifier : true}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

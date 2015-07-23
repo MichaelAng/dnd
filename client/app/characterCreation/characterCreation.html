@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-xs-4 well text-center">
-          {{(ability.points - 10)/2}}
+          {{ability.points | asModifier : true}}
         </div>
       </div>
 

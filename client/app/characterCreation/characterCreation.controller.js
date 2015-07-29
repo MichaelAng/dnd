@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('CharacterCreationCtrl', ['$scope', function ($scope) {
+  .controller('CharacterCreationCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.pointsRemaining = 27;
     $scope.abilities = [
       {name: 'Strength', nameAbbr: 'Str', points: 8},
@@ -42,9 +42,9 @@ angular.module('dndApp')
     $scope.getCost = function (abilityPointValue) {
       return $scope.standardPoints[abilityPointValue - 8];
     };
-    $scope.getPossiblePoints = function (pointsRemaining) {
+    $scope.getPossiblePoints = function () {
 
-    }
+    };
     $scope.recalculatePoints = function () {
       var subtrahend = 0;
       angular.forEach($scope.abilities, function (ability) {
@@ -53,5 +53,22 @@ angular.module('dndApp')
       $scope.pointsRemaining = 27 - subtrahend;
       $scope.constructSelects();
     };
+
+    $scope.createChar = function () {
+      var payload = {
+        characterClass: 'cleric',
+        name: 'Lord Orc',
+        race: 'Orc'
+      };
+
+      $http.post('/api/characters', payload)
+        .success(function(data) {
+          console.log('success', data);
+        })
+        .error(function() {
+          console.log('error');
+        });
+    };
+
   }
 ]);

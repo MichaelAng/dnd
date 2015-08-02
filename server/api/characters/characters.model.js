@@ -9,7 +9,7 @@ var CharactersSchema = new Schema({
   name: String,
   race: String,
   updatedDate: Date,
-  userId: String
-});
+  userId: {type: String, index: true}
+}, {autoIndex: true});
 
 module.exports = mongoose.model('Characters', CharactersSchema);

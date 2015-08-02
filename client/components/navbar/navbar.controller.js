@@ -6,8 +6,8 @@ angular.module('dndApp')
       'title': 'Home',
       'link': '/'
     }, {
-      'title': 'Character Creation',
-      'link': '/create'
+      'title': 'Create Character',
+      'link': '/create-character/race-class-picker'
     }, {
       'title': 'About',
       'link': '/about'

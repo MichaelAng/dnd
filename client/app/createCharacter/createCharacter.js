@@ -9,16 +9,16 @@ angular.module('dndApp')
         controller: 'CreateCharacterCtrl',
         abstract: true
       })
-      .state('createCharacter.race', {
+      .state('createCharacter.raceClassPicker', {
         url: '/race-class-picker',
         views: {
           '': {
             templateUrl: 'app/createCharacter/raceClassPicker/raceClassPicker.view.html'
           },
-          'selection@createCharacter.race': {
+          'selection@createCharacter.raceClassPicker': {
             templateUrl: 'app/createCharacter/raceClassPicker/picker.view.html'
           },
-          'description@createCharacter.race': {
+          'description@createCharacter.raceClassPicker': {
             templateUrl: 'app/createCharacter/raceClassPicker/description.view.html'
           }
         }

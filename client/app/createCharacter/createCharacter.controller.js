@@ -17,4 +17,5 @@ angular.module('dndApp')
         {id: 2, characterClass: 'Rogue',  description: 'pointy ears'},
         {id: 3, characterClass: 'Wizard',  description: 'Roughy and tough'}
     ];
+
   });

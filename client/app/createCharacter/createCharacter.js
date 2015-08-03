@@ -10,7 +10,8 @@ angular.module('dndApp')
       })
       .state('createCharacter.raceClassPicker', {
         url: '/race-class-picker',
-        controller: 'CreateCharacterCtrl as CreateCharacterCtrl',
+        controller: 'CreateCharacterCtrl',
+        controllerAs: 'CreateCharacterCtrl',
         templateUrl: 'app/createCharacter/raceClassPicker/raceClassPicker.view.html'
       });
   });

@@ -1,3 +1,20 @@
-<div>{{CreateCharacterCtrl.characterName}}</div>
-<pre>{{CreateCharacterCtrl.selectedRace | json}}</pre>
-<pre>{{CreateCharacterCtrl.selectedCharacterClass | json}}</pre>
+<div class="panel panel-default" ng-if="CreateCharacterCtrl.selectedRace">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{CreateCharacterCtrl.selectedRace.race}}
+    </h3>
+  </div>
+  <div class="panel-body">
+    {{CreateCharacterCtrl.selectedRace.info}}
+    </div>
+</div>
+<div class="panel panel-default" ng-if="CreateCharacterCtrl.selectedCharacterClass">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{CreateCharacterCtrl.selectedCharacterClass.characterClass}}
+    </h3>
+  </div>
+  <div class="panel-body">
+    {{CreateCharacterCtrl.selectedCharacterClass.info}}
+  </div>
+</div>

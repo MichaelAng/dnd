@@ -15,7 +15,7 @@
     <div class="col-sm-9">
       <select class="form-control"
         ng-model="CreateCharacterCtrl.selectedRace"
-        ng-options="race.race for race in CreateCharacterCtrl.races track by race.id">
+        ng-options="race.race for race in CreateCharacterCtrl.races track by race._id">
          <option value="">-- Select a Race --</option>
       </select>
     </div>
@@ -26,8 +26,8 @@
     <label for="input-class" class="col-sm-3 control-label">Class</label>
     <div class="col-sm-9">
       <select class="form-control"
-        ng-model="CreateCharacterCtrl.selectedClass"
-        ng-options="class.characterClass for class in CreateCharacterCtrl.characterClasses track by class.id">
+        ng-model="CreateCharacterCtrl.selectedCharacterClass"
+        ng-options="class.characterClass for class in CreateCharacterCtrl.characterClasses track by class._id">
          <option value="">-- Select a Class --</option>
       </select>
     </div>

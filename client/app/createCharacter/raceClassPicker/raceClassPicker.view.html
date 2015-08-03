@@ -1,2 +1,10 @@
-<div ui-view="selection"></div>
-<div ui-view="description"></div>
+<div class="row">
+    <div
+        class="col-md-7"
+        ng-include="'app/createCharacter/raceClassPicker/picker.view.html'">
+    </div>
+    <div
+        class="col-md-5"
+        ng-include="'app/createCharacter/raceClassPicker/description.view.html'">
+    </div>
+</div>

@@ -5,10 +5,10 @@ var mongoose = require('mongoose'),
 
 var CharactersSchema = new Schema({
   characterClass: String,
-  createdDate: Date,
+  createdDate: { type: Date, default: Date.now },
   name: String,
   race: String,
-  updatedDate: Date,
+  updatedDate: { type: Date, default: Date.now },
   userId: {type: String, index: true}
 }, {autoIndex: true});
 

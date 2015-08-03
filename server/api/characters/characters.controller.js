@@ -23,8 +23,6 @@ exports.show = function(req, res) {
 // Creates a new characters in the DB.
 exports.create = function(req, res) {
   req.body.userId = req.user._id;
-  req.body.createdDate = new Date();
-  req.body.updatedDate = new Date();
 
   Characters.create(req.body, function(err, characters) {
     if(err) { return handleError(res, err); }

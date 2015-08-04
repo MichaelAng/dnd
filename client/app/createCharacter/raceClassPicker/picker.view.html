@@ -1,62 +1,73 @@
 <form class="form-horizontal create-character-form"
-  name="CreateCharacterCtrl.form"
-  ng-submit="CreateCharacterCtrl.createCharacter()"
+  name="rcPickerCtrl.form"
+  ng-submit="rcPickerCtrl.createCharacter()"
   novalidate>
+
   <!-- Character Name -->
-  <div class="form-group">
+  <div class="form-group"
+    ng-class="{'has-error': rcPickerCtrl.form.name.$invalid && rcPickerCtrl.form.name.$touched}">
     <label class="col-sm-3 control-label" for="input-character-name">Character Name</label>
+
     <div class="col-sm-9">
-      <input class="form-control" id="input-character-name" type="text" placeholder="Enter your character's name..."
-        ng-model="CreateCharacterCtrl.characterName"
-        ng-model-options="{ updateOn: 'blur' }"
-        ng-pattern="CreateCharacterCtrl.validName"
-        name="CharacterName"
+      <input class="form-control" id="input-character-name" type="text" placeholder="Enter your hero's name"
+        ng-model="rcPickerCtrl.name"
+        ng-pattern="rcPickerCtrl.validName"
+        name="name"
         required>
-      <span class="error"
-        ng-show="CreateCharacterCtrl.form.CharacterName.$error.required && (CreateCharacterCtrl.form.CharacterName.$touched || CreateCharacterCtrl.form.$submitted)">
-          Required!
-      </span>
-      <span class="error"
-        ng-show="CreateCharacterCtrl.form.CharacterName.$error.pattern &&
-        (CreateCharacterCtrl.form.CharacterName.$touched || CreateCharacterCtrl.form.$submitted)">
-          Your name can only have letters, spaces, quotes, and dashes.
-      </span>
+
+      <div class="help-block"
+        ng-if="rcPickerCtrl.form.name.$touched"
+        ng-messages="rcPickerCtrl.form.name.$error">
+        <p ng-message="required">Required!</p>
+        <p ng-message="pattern">Your name can only have letters, spaces, quotes, and dashes.</p>
+      </div>
+
     </div>
   </div>
 
   <!-- Race Selection -->
-  <div class="form-group">
+  <div class="form-group"
+    ng-class="{'has-error': rcPickerCtrl.form.race.$invalid && rcPickerCtrl.form.race.$touched}">
     <label for="input-race" class="col-sm-3 control-label">Race</label>
+
     <div class="col-sm-9">
       <select class="form-control"
-        ng-model="CreateCharacterCtrl.selectedRace"
-        ng-options="race.race for race in CreateCharacterCtrl.races track by race._id"
-        name="CharacterRace"
+        ng-model="rcPickerCtrl.selectedRace"
+        ng-options="race.race for race in rcPickerCtrl.races track by race._id"
+        name="race"
         required>
          <option value="">-- Select a Race --</option>
       </select>
-      <span class="error"
-        ng-show="CreateCharacterCtrl.form.CharacterRace.$invalid && (CreateCharacterCtrl.form.CharacterRace.$touched || CreateCharacterCtrl.form.$submitted)">
-          Required!
-      </span>
+
+      <div class="help-block"
+        ng-if="rcPickerCtrl.form.race.$touched"
+        ng-messages="rcPickerCtrl.form.race.$error">
+        <p ng-message="required">Required!</p>
+      </div>
+
     </div>
   </div>
 
   <!-- Class Selection -->
-  <div class="form-group">
+  <div class="form-group"
+    ng-class="{'has-error': rcPickerCtrl.form.charClass.$invalid && rcPickerCtrl.form.charClass.$touched}">
     <label for="input-class" class="col-sm-3 control-label">Class</label>
+
     <div class="col-sm-9">
       <select class="form-control"
-        ng-model="CreateCharacterCtrl.selectedCharacterClass"
-        ng-options="class.characterClass for class in CreateCharacterCtrl.characterClasses track by class._id"
-        name="CharacterClass"
+        ng-model="rcPickerCtrl.selectedCharacterClass"
+        ng-options="class.characterClass for class in rcPickerCtrl.characterClasses track by class._id"
+        name="charClass"
         required>
          <option value="">-- Select a Class --</option>
       </select>
-      <span class="error"
-        ng-show="CreateCharacterCtrl.form.CharacterClass.$invalid && (CreateCharacterCtrl.form.CharacterClass.$touched || CreateCharacterCtrl.form.$submitted)">
-          Required!
-      </span>
+
+      <div class="help-block"
+        ng-if="rcPickerCtrl.form.charClass.$touched"
+        ng-messages="rcPickerCtrl.form.charClass.$error">
+        <p ng-message="required">Required!</p>
+      </div>
+
     </div>
   </div>
 
@@ -67,4 +78,3 @@
     </div>
   </div>
 </form>
-<pre>{{CreateCharacterCtrl.form|json}}</pre>

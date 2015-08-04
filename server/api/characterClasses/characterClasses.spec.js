@@ -6,7 +6,7 @@ var request = require('supertest');
 
 describe('GET /api/characterClasses', function() {
 
-  it('should respond with JSON array', function(done) {
+  xit('should respond with JSON array', function(done) {
     request(app)
       .get('/api/characterClasses')
       .expect(200)

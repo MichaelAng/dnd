@@ -3,15 +3,15 @@
 angular.module('dndApp')
   .factory('CreateCharacter', ['$http', function ($http) {
     var CreateCharacter = {};
-    CreateCharacter.races = [];
     CreateCharacter.characterClasses = [];
+    CreateCharacter.races = [];
 
-    CreateCharacter.saveCharacter = function(payload) {
-      return $http.post('/api/characters', payload)
-        .success(function(data) { //200
-          console.log('success', data);
+    CreateCharacter.getCharacterClasses = function () {
+      return $http.get('/api/characterClasses')
+        .success(function(data) {
+          CreateCharacter.characterClasses = data;
         })
-        .error(function() { //!200
+        .error(function() {
           console.log('error');
         });
     };
@@ -26,10 +26,10 @@ angular.module('dndApp')
         });
     };
 
-    CreateCharacter.getCharacterClasses = function () {
-      return $http.get('/api/characterClasses')
+    CreateCharacter.saveCharacter = function(payload) {
+      return $http.post('/api/characters', payload)
         .success(function(data) {
-          CreateCharacter.characterClasses = data;
+          console.log('success', data);
         })
         .error(function() {
           console.log('error');

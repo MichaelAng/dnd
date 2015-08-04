@@ -1,11 +1,26 @@
-<form class="form-horizontal" novalidate>
-
+<form class="form-horizontal create-character-form"
+  name="CreateCharacterCtrl.form"
+  ng-submit="CreateCharacterCtrl.createCharacter()"
+  novalidate>
   <!-- Character Name -->
   <div class="form-group">
     <label class="col-sm-3 control-label" for="input-character-name">Character Name</label>
     <div class="col-sm-9">
       <input class="form-control" id="input-character-name" type="text" placeholder="Enter your character's name..."
-        ng-model="CreateCharacterCtrl.characterName">
+        ng-model="CreateCharacterCtrl.characterName"
+        ng-model-options="{ updateOn: 'blur' }"
+        ng-pattern="CreateCharacterCtrl.validName"
+        name="CharacterName"
+        required>
+      <span class="error"
+        ng-show="CreateCharacterCtrl.form.CharacterName.$error.required && (CreateCharacterCtrl.form.CharacterName.$touched || CreateCharacterCtrl.form.$submitted)">
+          Required!
+      </span>
+      <span class="error"
+        ng-show="CreateCharacterCtrl.form.CharacterName.$error.pattern &&
+        (CreateCharacterCtrl.form.CharacterName.$touched || CreateCharacterCtrl.form.$submitted)">
+          Your name can only have letters, spaces, quotes, and dashes.
+      </span>
     </div>
   </div>
 
@@ -15,9 +30,15 @@
     <div class="col-sm-9">
       <select class="form-control"
         ng-model="CreateCharacterCtrl.selectedRace"
-        ng-options="race.race for race in CreateCharacterCtrl.races track by race._id">
+        ng-options="race.race for race in CreateCharacterCtrl.races track by race._id"
+        name="CharacterRace"
+        required>
          <option value="">-- Select a Race --</option>
       </select>
+      <span class="error"
+        ng-show="CreateCharacterCtrl.form.CharacterRace.$invalid && (CreateCharacterCtrl.form.CharacterRace.$touched || CreateCharacterCtrl.form.$submitted)">
+          Required!
+      </span>
     </div>
   </div>
 
@@ -27,16 +48,23 @@
     <div class="col-sm-9">
       <select class="form-control"
         ng-model="CreateCharacterCtrl.selectedCharacterClass"
-        ng-options="class.characterClass for class in CreateCharacterCtrl.characterClasses track by class._id">
+        ng-options="class.characterClass for class in CreateCharacterCtrl.characterClasses track by class._id"
+        name="CharacterClass"
+        required>
          <option value="">-- Select a Class --</option>
       </select>
+      <span class="error"
+        ng-show="CreateCharacterCtrl.form.CharacterClass.$invalid && (CreateCharacterCtrl.form.CharacterClass.$touched || CreateCharacterCtrl.form.$submitted)">
+          Required!
+      </span>
     </div>
   </div>
 
   <!-- Submission -->
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default pull-right">Submit</button>
+      <button class="btn btn-default pull-right" type="submit">Submit</button>
     </div>
   </div>
 </form>
+<pre>{{CreateCharacterCtrl.form|json}}</pre>

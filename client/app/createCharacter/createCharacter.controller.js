@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('CreateCharacterCtrl', ['CreateCharacter', function (CreateCharacter) {
+  .controller('CreateCharacterCtrl', ['CreateCharacter',
+    function (CreateCharacter) {
     var vm = this;
 
     vm.characterClasses = CreateCharacter.characterClasses;
@@ -17,4 +18,12 @@ angular.module('dndApp')
     CreateCharacter.getCharacterClasses().then(function () {
       vm.characterClasses = CreateCharacter.characterClasses;
     });
+    vm.validName = /^[\sa-zA-Z\-\"\']+$/;
+    vm.createCharacter = function () {
+      if (vm.form.$invalid) {
+        console.log('nooooooooo!');
+      } else {
+        console.log('yaaaaaay');
+      }
+    };
   }]);

@@ -58,4 +58,26 @@ describe('createCharacter.service.js: ', function () {
     });
   });
 
+  describe('saveCharacter(): ', function () {
+    var httpBackendResponse;
+    var payload = {name: 'Krog', characterClass: 'Fighter', race: 'Human'};
+    beforeEach(function () {
+      httpBackendResponse =
+        $httpBackend.expectPOST('/api/characters').respond(200, payload);
+      CreateCharacter.saveCharacter(payload);
+    });
+
+    it('should get characterClasses with a successful response', function () {
+      $httpBackend.flush();
+      expect(CreateCharacter.character).toEqual(payload);
+    });
+
+    it('should get characterClasses with a unsuccessful response', function () {
+      httpBackendResponse.respond(300, {});
+      $httpBackend.flush();
+      expect(CreateCharacter.character).toEqual({});
+    });
+  });
+
+
 });

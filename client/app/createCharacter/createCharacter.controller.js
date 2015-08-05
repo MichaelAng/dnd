@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('CreateCharacterCtrl', [function (CreateCharacter) {
+  .controller('CreateCharacterCtrl', [function () {
 
   }]);

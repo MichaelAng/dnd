@@ -24,9 +24,9 @@ angular.module('dndApp')
         name: vm.name,
         race: vm.selectedRace
       };
-
+      console.log(vm.form.$valid);
       if (vm.form.$valid) {
-         CreateCharacter.saveCharacter(payload);
+        CreateCharacter.saveCharacter(payload);
       }
     };
 

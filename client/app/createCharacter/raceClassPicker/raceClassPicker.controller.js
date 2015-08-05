@@ -27,6 +27,7 @@ angular.module('dndApp')
 
       if (vm.form.$valid) {
         CreateCharacter.saveCharacter(payload);
+
       }
     };
 

@@ -14,5 +14,11 @@ angular.module('dndApp')
         controller: 'RaceClassPickerCtrl',
         controllerAs: 'rcPickerCtrl',
         templateUrl: 'app/createCharacter/raceClassPicker/raceClassPicker.view.html'
+      })
+      .state('createCharacter.abilityScorePicker', {
+        url: '/ability-score-picker',
+        templateUrl: 'app/createCharacter/abilityScorePicker/abilityScorePicker.html',
+        controller: 'abilityScorePickerCtrl',
+        controllerAs: 'asPickerCtrl'
       });
   });

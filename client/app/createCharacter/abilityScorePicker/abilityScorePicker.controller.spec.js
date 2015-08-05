@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: CharacterCreationCtrl', function () {
+describe('abilityScorePicker.controller.js: ', function () {
 
   // load the controller's module
   beforeEach(module('dndApp'));

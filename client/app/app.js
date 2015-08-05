@@ -4,6 +4,7 @@ angular.module('dndApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngMessages',
   'ui.router',
   'ui.bootstrap'
 ])

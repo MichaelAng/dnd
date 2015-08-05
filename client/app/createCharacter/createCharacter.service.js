@@ -5,6 +5,7 @@ angular.module('dndApp')
     var factory = {};
     factory.characterClasses = [];
     factory.races = [];
+    factory.character = {};
 
     factory.getCharacterClasses = function () {
       return $http.get('/api/characterClasses')
@@ -29,7 +30,7 @@ angular.module('dndApp')
     factory.saveCharacter = function(payload) {
       return $http.post('/api/characters', payload)
         .success(function(data) {
-          console.log('success', data);
+          factory.character = data;
         })
         .error(function() {
           console.log('error');

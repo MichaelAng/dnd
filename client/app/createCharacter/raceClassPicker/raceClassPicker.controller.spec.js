@@ -8,23 +8,34 @@ describe('raceClassPicker.controller.js: ', function () {
   var RaceClassPickerCtrl;
   var scope;
   var CreateCharacter;
+  var $q;
 
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _CreateCharacter_) {
+  beforeEach(inject(function (
+    $controller,
+    $rootScope,
+    _$q_,
+    _CreateCharacter_
+    ) {
+    $q = _$q_;
     scope = $rootScope.$new();
     CreateCharacter = _CreateCharacter_;
-    RaceClassPickerCtrl = $controller('RaceClassPickerCtrl as rcpCtrl', {
-      $scope: scope
-    });
+    RaceClassPickerCtrl = function () {
+      return $controller('RaceClassPickerCtrl as rcpCtrl', {
+        $scope: scope
+      });
+    }
   }));
 
   it('should have an empty name on init', function () {
+    RaceClassPickerCtrl();
     expect(scope.rcpCtrl.name).toEqual('');
   });
 
   describe('createCharacter(): ', function() {
     beforeEach(function() {
+      RaceClassPickerCtrl();
       scope.rcpCtrl.form = {
         $error: {
             required: [{
@@ -58,5 +69,25 @@ describe('raceClassPicker.controller.js: ', function () {
       expect(CreateCharacter.saveCharacter)
         .not.toHaveBeenCalled();
     })
+  });
+
+  it('should get Races', function() {
+    CreateCharacter.races = [{
+      name: 'dog',
+      info: 'itchy'
+    }];
+    spyOn(CreateCharacter, 'getRaces').andReturn($q.defer().promise);
+    RaceClassPickerCtrl();
+    expect(scope.rcpCtrl.races).toEqual(CreateCharacter.races);
+  });
+
+  it('should get Classes', function() {
+    CreateCharacter.characterClasses = [{
+      name: 'knight',
+      info: 'heavy'
+    }];
+    spyOn(CreateCharacter, 'getCharacterClasses').andReturn($q.defer().promise);
+    RaceClassPickerCtrl();
+    expect(scope.rcpCtrl.characterClasses).toEqual(CreateCharacter.characterClasses);
   });
 });

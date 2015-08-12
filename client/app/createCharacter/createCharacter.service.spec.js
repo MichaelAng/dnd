@@ -2,6 +2,7 @@
 
 describe('createCharacter.service.js: ', function () {
   beforeEach(module('dndApp'));
+  beforeEach(module('dnd.templates'));
 
   var $httpBackend;
   var CreateCharacter;
@@ -10,7 +11,6 @@ describe('createCharacter.service.js: ', function () {
   beforeEach(inject(function (_CreateCharacter_, _$httpBackend_) {
     $httpBackend = _$httpBackend_;
     CreateCharacter = _CreateCharacter_;
-
   }));
 
   afterEach(function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dndApp')
-  .factory('CreateCharacter', ['$http', function ($http) {
+  .factory('CreateCharacter', ['$http', '$state', function ($http, $state) {
     var factory = {};
     factory.characterClasses = [];
     factory.races = [];
@@ -31,6 +31,7 @@ angular.module('dndApp')
       return $http.post('/api/characters', payload)
         .success(function(data) {
           factory.character = data;
+          $state.go('createCharacter.abilityScorePicker');
         })
         .error(function() {
           console.log('error');

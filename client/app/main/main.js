@@ -5,7 +5,7 @@ angular.module('dndApp')
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'app/main/main.html',
+        templateUrl: 'app/main/main.view.html',
         controller: 'MainCtrl'
       });
   });

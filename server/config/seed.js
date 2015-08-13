@@ -12,13 +12,15 @@ var CharacterClasses = require('../api/characterClasses/characterClasses.model')
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    firstName: 'Chris',
+    lastName: 'Sakai',
     email: 'test@test.com',
     password: 'test'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
+    firstName: 'Michael',
+    lastName: 'Ang',
     email: 'admin@admin.com',
     password: 'admin'
   }, function() {

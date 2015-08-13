@@ -13,32 +13,32 @@ var RacesSchema = new Schema({
     required: true
   },
   abilityScoreIncrease: {
-    Strength: {
+    strength: {
       type: Number,
       default: 0,
       required: true
     },
-    Dexterity: {
+    dexterity: {
       type: Number,
       default: 0,
       required: true
     },
-    Constitution: {
+    constitution: {
       type: Number,
       default: 0,
       required: true
     },
-    Intelligence: {
+    intelligence: {
       type: Number,
       default: 0,
       required: true
     },
-    Wisdom: {
+    wisdom: {
       type: Number,
       default: 0,
       required: true
     },
-    Charisma: {
+    charisma: {
       type: Number,
       default: 0,
       required: true

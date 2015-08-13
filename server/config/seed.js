@@ -32,12 +32,12 @@ Races.find({}).remove(function() {
     race: 'Human',
     info: 'I am puny',
     abilityScoreIncrease: {
-      Strength: 0,
-      Dexterity: 0,
-      Constitution: 0,
-      Intelligence: 0,
-      Wisdom:  0,
-      Charisma: 0
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
     },
     size: 'medium',
     walkSpeed: 30,
@@ -49,12 +49,12 @@ Races.find({}).remove(function() {
     race: 'Halfling',
     info: 'I am small',
     abilityScoreIncrease: {
-      Strength: 0,
-      Dexterity: 0,
-      Constitution: 0,
-      Intelligence: 0,
-      Wisdom:  0,
-      Charisma: 0
+      strength: 0,
+      dexterity: 2,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
     },
     size: 'small',
     walkSpeed: 25,
@@ -66,12 +66,12 @@ Races.find({}).remove(function() {
     race: 'Dwarf',
     info: 'I am stocky',
     abilityScoreIncrease: {
-      Strength: 0,
-      Dexterity: 0,
-      Constitution: 0,
-      Intelligence: 0,
-      Wisdom:  0,
-      Charisma: 0
+      strength: 0,
+      dexterity: 0,
+      constitution: 2,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
     },
     size: 'medium',
     walkSpeed: 25,
@@ -83,12 +83,12 @@ Races.find({}).remove(function() {
     race: 'Elf',
     info: 'I am skinny',
     abilityScoreIncrease: {
-      Strength: 0,
-      Dexterity: 0,
-      Constitution: 0,
-      Intelligence: 0,
-      Wisdom:  0,
-      Charisma: 0
+      strength: 0,
+      dexterity: 2,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
     },
     size: 'medium',
     walkSpeed: 30,

@@ -12,7 +12,7 @@ var RacesSchema = new Schema({
     type: String,
     required: true
   },
-  abilityScoreIncrease: new Schema({
+  abilityScoreIncrease: {
     Strength: {
       type: Number,
       default: 0,
@@ -43,9 +43,7 @@ var RacesSchema = new Schema({
       default: 0,
       required: true
     }
-  }, {
-    _id: false
-  }),
+  },
   size: {
     type: String,
     enum: ['Small', 'Medium', 'Large'],
@@ -55,7 +53,7 @@ var RacesSchema = new Schema({
   walkSpeed: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
     default: 30
   },
   flightSpeed: {
@@ -84,8 +82,8 @@ RacesSchema.pre('save', function (next) {
     return element === 'Common';
   }
 
-  if ( !languages.some(hasCommonLanguage) ) {
-    languages.push('Common');
+  if ( !this.languages.some(hasCommonLanguage) ) {
+    this.languages.push('Common');
   };
   next();
 });

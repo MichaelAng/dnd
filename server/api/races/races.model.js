@@ -46,9 +46,10 @@ var RacesSchema = new Schema({
   },
   size: {
     type: String,
-    enum: ['Small', 'Medium', 'Large'],
+    enum: ['small', 'medium', 'large'],
     required: true,
-    default: 'Medium'
+    lowercase: true,
+    default: 'medium'
   },
   walkSpeed: {
     type: Number,

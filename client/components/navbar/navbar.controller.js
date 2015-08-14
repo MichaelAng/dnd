@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $state) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'parentState': 'main',
+      'state': 'main'
     }, {
       'title': 'Create Character',
-      'link': '/create-character/race-class-picker'
+      'parentState': 'createCharacter',
+      'state': 'createCharacter.raceClassPicker'
     }, {
       'title': 'About',
-      'link': '/about'
+      'parentState': 'about',
+      'state': 'about'
     }];
 
     $scope.isCollapsed = true;
@@ -24,6 +27,6 @@ angular.module('dndApp')
     };
 
     $scope.isActive = function(route) {
-      return route === $location.path();
+      return $state.includes(route);
     };
   });

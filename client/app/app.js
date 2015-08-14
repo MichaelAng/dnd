@@ -42,7 +42,12 @@ angular.module('dndApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(
+    [        '$rootScope', '$location', 'Auth', '$state', '$stateParams',
+    function ($rootScope,  $location,   Auth,   $state,   $stateParams) {
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
@@ -52,4 +57,4 @@ angular.module('dndApp', [
         }
       });
     });
-  });
+  }]);

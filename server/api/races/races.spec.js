@@ -3,11 +3,38 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
+var User = require('../user/user.model');
+
+var user = new User({
+  provider: 'local',
+  name: 'Fake User',
+  email: 'test@test.com',
+  password: 'password',
+  role: 'admin'
+});
 
 describe('GET /api/races', function() {
 
+  // Setup
+  before(function(done) {
+    // Clear users before testing
+    User.remove().exec().then(function() {
+      done();
+    });
+
+    // Saves a user
+    user.save();
+  });
+
+  // Teardown
+  after(function(done) {
+    User.remove().exec().then(function() {
+      done();
+    });
+  });
+
   var auth = {};
-  before(createUserAndLogin(auth));
+  before(loginUser(auth));
 
   it('should respond with JSON array', function(done) {
 
@@ -22,15 +49,17 @@ describe('GET /api/races', function() {
         done();
       });
   });
+
 });
 
-function createUserAndLogin(auth) {
+function loginUser(auth) {
     return function(done) {
         request(app)
-            .post('/api/users')
+            // .post('/api/users')
+            .post('/auth/local')
             .send({
                 email: 'test@test.com',
-                password: 'test'
+                password: 'password'
             })
             .expect(200)
             .end(onResponse);
@@ -38,6 +67,7 @@ function createUserAndLogin(auth) {
         function onResponse(err, res) {
             auth.token = res.body.token;
             console.log('========================================');
+            console.log(res.body);
             console.log(auth.token);
             console.log('========================================');
             return done();

@@ -4,6 +4,7 @@ var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
 var User = require('../user/user.model');
+var UserCtrl = require('../user/user.controller');
 
 var user = new User({
   provider: 'local',
@@ -14,6 +15,7 @@ var user = new User({
 });
 
 describe('GET /api/races', function() {
+  var auth = {};
 
   // Setup
   before(function(done) {
@@ -22,9 +24,27 @@ describe('GET /api/races', function() {
       done();
     });
 
-    // Saves a user
-    user.save();
+    var req = {
+      body: {
+        provider: 'local',
+        name: 'Fake User',
+        email: 'test@test.com',
+        password: 'password',
+        role: 'admin'
+      }
+    };
+
+    var res = {
+      json: function (obj) {
+        auth.token = obj.token;
+      }
+    };
+
+    UserCtrl.create(req, res);
   });
+
+
+  // before(createUserAndlogin(auth));
 
   // Teardown
   after(function(done) {
@@ -32,9 +52,6 @@ describe('GET /api/races', function() {
       done();
     });
   });
-
-  var auth = {};
-  before(loginUser(auth));
 
   it('should respond with JSON array', function(done) {
 
@@ -52,11 +69,11 @@ describe('GET /api/races', function() {
 
 });
 
-function loginUser(auth) {
+function createUserAndlogin(auth) {
     return function(done) {
         request(app)
-            // .post('/api/users')
-            .post('/auth/local')
+            .post('/api/users')
+            // .post('/auth/local')
             .send({
                 email: 'test@test.com',
                 password: 'password'

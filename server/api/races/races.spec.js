@@ -3,55 +3,17 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var User = require('../user/user.model');
-var UserCtrl = require('../user/user.controller');
-
-var user = new User({
-  provider: 'local',
-  name: 'Fake User',
-  email: 'test@test.com',
-  password: 'password',
-  role: 'admin'
-});
+var log = require('../../components/testingTools/logInOut');
 
 describe('GET /api/races', function() {
   var auth = {};
 
   // Setup
-  before(function(done) {
-    // Clear users before testing
-    User.remove().exec().then(function() {
-      done();
-    });
-
-    var req = {
-      body: {
-        provider: 'local',
-        name: 'Fake User',
-        email: 'test@test.com',
-        password: 'password',
-        role: 'admin'
-      }
-    };
-
-    var res = {
-      json: function (obj) {
-        auth.token = obj.token;
-      }
-    };
-
-    UserCtrl.create(req, res);
-  });
-
-
-  // before(createUserAndlogin(auth));
+  before(log.clearUsersCollection());
+  before(log.createUserAndlogin(auth));
 
   // Teardown
-  after(function(done) {
-    User.remove().exec().then(function() {
-      done();
-    });
-  });
+  after(log.clearUsersCollection());
 
   it('should respond with JSON array', function(done) {
 
@@ -68,26 +30,3 @@ describe('GET /api/races', function() {
   });
 
 });
-
-function createUserAndlogin(auth) {
-    return function(done) {
-        request(app)
-            .post('/api/users')
-            // .post('/auth/local')
-            .send({
-                email: 'test@test.com',
-                password: 'password'
-            })
-            .expect(200)
-            .end(onResponse);
-
-        function onResponse(err, res) {
-            auth.token = res.body.token;
-            console.log('========================================');
-            console.log(res.body);
-            console.log(auth.token);
-            console.log('========================================');
-            return done();
-        }
-    };
-}

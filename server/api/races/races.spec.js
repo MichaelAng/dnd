@@ -10,7 +10,7 @@ describe('GET /api/races', function() {
 
   // Setup
   before(log.clearUsersCollection());
-  before(log.createUserAndlogin(auth));
+  before(log.createUserAndLogin(auth, 'test@test.com', 'test', 'admin'));
 
   // Teardown
   after(log.clearUsersCollection());

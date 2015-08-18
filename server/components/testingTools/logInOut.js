@@ -2,7 +2,7 @@
 
 var app = require('../../app');
 var request = require('supertest');
-var User = require('../../api/user/user.model');
+var User = require('../../api/users/users.model');
 
 exports.clearUsersCollection = clearUsersCollection;
 exports.createUser = createUser;

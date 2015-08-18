@@ -13,6 +13,8 @@ angular.module('dndApp')
     vm.validName = /^[\sa-zA-Z\-\"\']+$/;
 
     vm.createCharacter = function () {
+
+      // TODO: this should be it's own service
       angular.forEach(vm.form.$error, function (field) {
           angular.forEach(field, function(errorField){
               errorField.$setTouched();

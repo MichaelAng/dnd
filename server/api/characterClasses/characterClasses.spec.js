@@ -3,12 +3,22 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
+var log = require('../../components/testingTools/logInOut');
 
 describe('GET /api/characterClasses', function() {
+  var auth = {};
 
-  xit('should respond with JSON array', function(done) {
+  // Setup Authorized User
+  before(log.clearUsersCollection());
+  before(log.createUserAndLogin(auth, 'test@test.com', 'test', 'admin'));
+
+  // Teardown User
+  after(log.clearUsersCollection());
+
+  it('should respond with JSON array', function(done) {
     request(app)
       .get('/api/characterClasses')
+      .set('Authorization', 'bearer ' + auth.token)
       .expect(200)
       .expect('Content-Type', /json/)
       .end(function(err, res) {

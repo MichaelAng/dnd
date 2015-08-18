@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./user.controller');
+var controller = require('./users.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
 

@@ -6,8 +6,31 @@ var config = require('../config/environment');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
-var User = require('../api/user/user.model');
+var User = require('../api/users/users.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
+
+exports.hasRole = hasRole;
+exports.isAuthenticated = isAuthenticated;
+exports.setTokenCookie = setTokenCookie;
+exports.signToken = signToken;
+
+/**
+ * Checks if the user role meets the minimum requirements of the route
+ */
+function hasRole(roleRequired) {
+  if (!roleRequired) throw new Error('Required role needs to be set');
+
+  return compose()
+    .use(isAuthenticated())
+    .use(function meetsRequirements(req, res, next) {
+      if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
+        next();
+      }
+      else {
+        res.status(403).send('Forbidden');
+      }
+    });
+}
 
 /**
  * Attaches the user object to the request if authenticated
@@ -36,31 +59,6 @@ function isAuthenticated() {
 }
 
 /**
- * Checks if the user role meets the minimum requirements of the route
- */
-function hasRole(roleRequired) {
-  if (!roleRequired) throw new Error('Required role needs to be set');
-
-  return compose()
-    .use(isAuthenticated())
-    .use(function meetsRequirements(req, res, next) {
-      if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
-        next();
-      }
-      else {
-        res.status(403).send('Forbidden');
-      }
-    });
-}
-
-/**
- * Returns a jwt token signed by the app secret
- */
-function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
-}
-
-/**
  * Set token cookie directly for oAuth strategies
  */
 function setTokenCookie(req, res) {
@@ -70,7 +68,9 @@ function setTokenCookie(req, res) {
   res.redirect('/');
 }
 
-exports.isAuthenticated = isAuthenticated;
-exports.hasRole = hasRole;
-exports.signToken = signToken;
-exports.setTokenCookie = setTokenCookie;
+/**
+ * Returns a jwt token signed by the app secret
+ */
+function signToken(id) {
+  return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
+}

@@ -5,7 +5,7 @@
 
 'use strict';
 
-var User = require('../api/user/user.model');
+var User = require('../api/users/users.model');
 var Races = require('../api/races/races.model');
 var CharacterClasses = require('../api/characterClasses/characterClasses.model');
 

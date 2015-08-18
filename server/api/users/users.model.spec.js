@@ -2,7 +2,7 @@
 
 var should = require('should');
 var app = require('../../app');
-var User = require('./user.model');
+var User = require('./users.model');
 
 var user = new User({
   provider: 'local',

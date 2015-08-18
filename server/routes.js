@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.use('/api/characterClasses', require('./api/characterClasses'));
   app.use('/api/races', require('./api/races'));
   app.use('/api/characters', require('./api/characters'));
-  app.use('/api/users', require('./api/user'));
+  app.use('/api/users', require('./api/users'));
 
   app.use('/auth', require('./auth'));
 

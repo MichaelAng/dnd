@@ -3,9 +3,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+var _ = require('lodash');
 
 var UserSchema = new Schema({
-  name: String,
+  firstName: String,
+  lastName: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -29,7 +31,17 @@ UserSchema
   .get(function() {
     return this._password;
   });
-
+UserSchema
+  .virtual('name')
+  .set(function (name) {
+    name = name.split(' ');
+    this.lastName = name.pop();
+    this.firstName = name.join(' ');
+  })
+  .get(function () {
+    var name = _.compact([this.firstName, this.lastName]);
+    return name.join(' ');
+  });
 // Public profile information
 UserSchema
   .virtual('profile')

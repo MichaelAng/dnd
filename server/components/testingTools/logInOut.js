@@ -9,6 +9,7 @@ exports.createUser = createUser;
 exports.createUserAndLogin = createUserAndLogin;
 exports.deleteUser = deleteUser;
 exports.login = login;
+exports.changeRole = changeRole;
 
 function clearUsersCollection () {
   return function (done) {
@@ -19,14 +20,14 @@ function clearUsersCollection () {
   };
 };
 
-function createUser (email, password, role) {
+function createUser (_email, _password, _role) {
   return function (done) {
     var user = new User({
       provider: 'local',
       name: 'Fake User',
-      email: email,
-      password: password,
-      role: role
+      email: _email,
+      password: _password,
+      role: _role
     });
 
     user.save(function() {
@@ -35,29 +36,30 @@ function createUser (email, password, role) {
   };
 };
 
-function createUserAndLogin (auth, email, password, role) {
+function createUserAndLogin (auth, _email, _password, _role) {
   return function (done) {
-    createUser(email, password, role)(function () {
-      login(auth, email, password)(done);
+    createUser(_email, _password, _role)(function () {
+      login(auth, _email, _password)(done);
     });
   };
 };
 
-function deleteUser (email) {
+function deleteUser (_email) {
   return function (done) {
-    User.remove({ email: email }).exec().then(function() {
-      done();
+    User.remove({ email: _email }).exec()
+      .then(function() {
+        done();
     });
   };
 };
 
-function login (auth, email, password) {
+function login (auth, _email, _password) {
   return function (done) {
     request(app)
       .post('/auth/local')
       .send({
-        email: email,
-        password: password
+        email: _email,
+        password: _password
       })
       .expect(200)
       .end(onResponse);
@@ -66,5 +68,25 @@ function login (auth, email, password) {
       auth.token = res.body.token;
       return done();
     }
+  };
+};
+
+function changeRole (_email, _role) {
+  return function (done) {
+    User.findOneAndUpdate({
+      email: _email
+    }, {
+      $set: {
+        role: _role
+      }
+    }, function (err, user) {
+      if (err) {
+        throw err;
+      } else if (!user) {
+        throw 'No User with this Email';
+      } else {
+        done();
+      }
+    });
   };
 };

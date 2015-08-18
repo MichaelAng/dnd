@@ -8,14 +8,15 @@ var log = require('../../components/testingTools/logInOut');
 describe('GET /api/races', function() {
   var auth = {};
 
-  // Setup Authorized User
+  // Setup
   before(log.clearUsersCollection());
-  before(log.createUserAndLogin(auth, 'test@test.com', 'test', 'admin'));
+  before(log.createUserAndlogin(auth));
 
-  // Teardown User
+  // Teardown
   after(log.clearUsersCollection());
 
   it('should respond with JSON array', function(done) {
+
     request(app)
       .get('/api/races')
       .set('Authorization', 'bearer ' + auth.token)

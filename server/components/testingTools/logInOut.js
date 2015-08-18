@@ -25,7 +25,7 @@ exports.createUserAndlogin = function (auth) {
       .end(onResponse);
 
     function onResponse(err, res) {
-      auth.token = res.body.token;]
+      auth.token = res.body.token;
       return done();
     }
   };

@@ -3,8 +3,6 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-
-var User = require('../user/user.model');
 var log = require('../../components/testingTools/logInOut');
 
 describe('GET /api/races', function() {

@@ -12,13 +12,15 @@ var CharacterClasses = require('../api/characterClasses/characterClasses.model')
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    firstName: 'Chris',
+    lastName: 'Sakai',
     email: 'test@test.com',
     password: 'test'
   }, {
     provider: 'local',
     role: 'admin',
-    name: 'Admin',
+    firstName: 'Michael',
+    lastName: 'Ang',
     email: 'admin@admin.com',
     password: 'admin'
   }, function() {
@@ -30,16 +32,72 @@ User.find({}).remove(function() {
 Races.find({}).remove(function() {
   Races.create({
     race: 'Human',
-    info: 'I am puny'
+    info: 'I am puny',
+    abilityScoreIncrease: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
+    },
+    size: 'medium',
+    walkSpeed: 30,
+    flightSpeed: 0,
+    swimSpeed: 0,
+    darkvision: false,
+    languages: ['Common']
   }, {
     race: 'Halfling',
-    info: 'I am small'
+    info: 'I am small',
+    abilityScoreIncrease: {
+      strength: 0,
+      dexterity: 2,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
+    },
+    size: 'small',
+    walkSpeed: 25,
+    flightSpeed: 0,
+    swimSpeed: 0,
+    darkvision: false,
+    languages: ['Common', 'Halfling']
   }, {
     race: 'Dwarf',
-    info: 'I am stocky'
+    info: 'I am stocky',
+    abilityScoreIncrease: {
+      strength: 0,
+      dexterity: 0,
+      constitution: 2,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
+    },
+    size: 'medium',
+    walkSpeed: 25,
+    flightSpeed: 0,
+    swimSpeed: 0,
+    darkvision: false,
+    languages: ['Common', 'Dwarvish']
   }, {
     race: 'Elf',
-    info: 'I am skinny'
+    info: 'I am skinny',
+    abilityScoreIncrease: {
+      strength: 0,
+      dexterity: 2,
+      constitution: 0,
+      intelligence: 0,
+      wisdom:  0,
+      charisma: 0
+    },
+    size: 'medium',
+    walkSpeed: 30,
+    flightSpeed: 0,
+    swimSpeed: 0,
+    darkvision: false,
+    languages: ['Common', 'Elvish']
   }, function() {
       console.log('finished populating races');
     }

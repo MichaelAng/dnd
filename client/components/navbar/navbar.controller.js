@@ -1,29 +1,36 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
+  .controller('NavbarCtrl',
+    [        '$location', 'Auth', '$state',
+    function ($location,   Auth,   $state) {
+    var vm = this;
+
+    vm.menu = [{
       'title': 'Home',
-      'link': '/'
+      'parentState': 'main',
+      'state': 'main'
     }, {
       'title': 'Create Character',
-      'link': '/create-character/race-class-picker'
+      'parentState': 'createCharacter',
+      'state': 'createCharacter.raceClassPicker'
     }, {
       'title': 'About',
-      'link': '/about'
+      'parentState': 'about',
+      'state': 'about'
     }];
 
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+    vm.isCollapsed = true;
+    vm.isLoggedIn = Auth.isLoggedIn;
+    vm.isAdmin = Auth.isAdmin;
+    vm.getCurrentUser = Auth.getCurrentUser;
 
-    $scope.logout = function() {
+    vm.logout = function() {
       Auth.logout();
       $location.path('/login');
     };
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
+    vm.isActive = function(route) {
+      return $state.includes(route);
     };
-  });
+  }]);

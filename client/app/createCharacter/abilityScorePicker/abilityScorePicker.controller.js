@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dndApp')
-  .controller('abilityScorePickerCtrl', ['$http', function ($http) {
+  .controller('abilityScorePickerCtrl', [function () {
     var vm = this;
 
     vm.pointsRemaining = 27;

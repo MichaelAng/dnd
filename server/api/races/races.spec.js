@@ -3,17 +3,17 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var log = require('../../components/testingTools/logInOut');
+var logInOut = require('../../components/testingTools/logInOut');
 
 describe('GET /api/races', function() {
   var auth = {};
 
   // Setup
-  before(log.clearUsersCollection());
-  before(log.createUserAndLogin(auth, 'test@test.com', 'test', 'admin'));
+  before(logInOut.clearUsersCollection());
+  before(logInOut.createUserAndLogin(auth, 'test@test.com', 'test', 'admin'));
 
   // Teardown
-  after(log.clearUsersCollection());
+  after(logInOut.clearUsersCollection());
 
   it('should respond with JSON array', function(done) {
 

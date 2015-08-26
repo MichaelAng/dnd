@@ -25,7 +25,7 @@ describe('raceClassPicker.controller.js: ', function () {
       return $controller('RaceClassPickerCtrl as rcpCtrl', {
         $scope: scope
       });
-    }
+    };
   }));
 
   it('should have an empty name on init', function () {

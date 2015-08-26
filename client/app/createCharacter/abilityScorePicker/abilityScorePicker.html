@@ -1,25 +1,38 @@
 <!-- Ability Score -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
+<div
+  class="container">
+  <div
+    class="row">
+    <div
+      class="col-lg-12">
       {{asPickerCtrl.pointsRemaining}}
 
       <!-- ability-score-row -->
-      <div class="ability-score-row row" ng-repeat="ability in asPickerCtrl.abilities">
-        <div class="col-xs-4 well">
+      <div
+        class="ability-score-row row"
+        ng-repeat="ability in asPickerCtrl.abilities">
+        <div
+          class="col-xs-4 well">
           {{ability.name}}
         </div>
 
-        <div class="col-xs-4 well text-center">
-          <div class="form-group pull-left">
-            <select ng-model="ability.points" ng-options="point for point in ability.selectable" ng-change="asPickerCtrl.recalculatePoints()"></select>
+        <div
+          class="col-xs-4 well text-center">
+          <div
+            class="form-group pull-left">
+            <select
+              ng-model="ability.points"
+              ng-options="point for point in ability.selectable"
+              ng-change="asPickerCtrl.recalculatePoints()"></select>
           </div>
-          <div class="pull-right">
+          <div
+            class="pull-right">
             Cost: {{asPickerCtrl.getCost(ability.points) | quantify: 'point'}}
           </div>
         </div>
 
-        <div class="col-xs-4 well text-center">
+        <div
+          class="col-xs-4 well text-center">
           {{ability.points | asModifier : true}}
         </div>
       </div>

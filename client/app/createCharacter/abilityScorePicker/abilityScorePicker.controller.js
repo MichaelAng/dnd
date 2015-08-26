@@ -16,7 +16,9 @@ angular.module('dndApp')
     ];
 
     //Cost to get points based on abilityPointValue - 8
-    vm.standardPoints = [0,1,2,3,4,5,7,9];
+    vm.standardPoints = [0, 1, 2, 3, 4, 5, 7, 9];
+    //Base values you can get based on Ability Score Points
+    vm.selectablePoints = [8, 9, 10, 11, 12, 13, 13, 14, 14, 15];
 
     vm.constructSelects = function () {
       var ceiling = 16;
@@ -25,13 +27,7 @@ angular.module('dndApp')
           ability.selectable = _.range(8, ceiling);
         });
       } else {
-        if (vm.pointsRemaining <= 5) {
-          ceiling = vm.pointsRemaining + 8;
-        } else if (vm.pointsRemaining === 7) {
-          ceiling = 14;
-        } else {
-          ceiling = 15;
-        }
+        ceiling = vm.getPossiblePoints(vm.pointsRemaining);
         ceiling++;
         angular.forEach(vm.abilities, function (ability) {
           if (vm.getCost(ability.points) > vm.pointsRemaining) {
@@ -49,8 +45,8 @@ angular.module('dndApp')
       return vm.standardPoints[abilityPointValue - 8];
     };
 
-    vm.getPossiblePoints = function () {
-
+    vm.getPossiblePoints = function (remainingPoints) {
+      return vm.selectablePoints[remainingPoints];
     };
 
     vm.recalculatePoints = function () {
@@ -62,4 +58,10 @@ angular.module('dndApp')
       vm.constructSelects();
     };
 
+    vm.resetForm = function () {
+      angular.forEach(vm.abilities, function (val, key) {
+        vm.abilities[key].points = 8;
+      });
+      vm.recalculatePoints();
+    };
   }]);

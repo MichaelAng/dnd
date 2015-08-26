@@ -10,7 +10,7 @@ describe('abilityScorePicker.controller.js: ', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    CharacterCreationCtrl = $controller('abilityScorePickerCtrl as asPickerCtrl', {
+    $controller('abilityScorePickerCtrl as asPickerCtrl', {
       $scope: scope
     });
   }));
@@ -36,4 +36,48 @@ describe('abilityScorePicker.controller.js: ', function () {
     expect(result).toEqual(9);
   });
 
+  it('should return possible selectable points based on remaining cost', function() {
+    expect(scope.asPickerCtrl.getPossiblePoints(0)).toEqual(8);
+    expect(scope.asPickerCtrl.getPossiblePoints(1)).toEqual(9);
+    expect(scope.asPickerCtrl.getPossiblePoints(2)).toEqual(10);
+    expect(scope.asPickerCtrl.getPossiblePoints(3)).toEqual(11);
+    expect(scope.asPickerCtrl.getPossiblePoints(4)).toEqual(12);
+    expect(scope.asPickerCtrl.getPossiblePoints(5)).toEqual(13);
+    expect(scope.asPickerCtrl.getPossiblePoints(6)).toEqual(13);
+    expect(scope.asPickerCtrl.getPossiblePoints(7)).toEqual(14);
+    expect(scope.asPickerCtrl.getPossiblePoints(8)).toEqual(14);
+    expect(scope.asPickerCtrl.getPossiblePoints(9)).toEqual(15);
+  });
+
+  it('should reset all ability bases to 8 on reset', function () {
+    scope.asPickerCtrl.abilities.forEach(function (element) {
+      element.points = 12;
+    });
+
+    scope.asPickerCtrl.resetForm();
+
+    scope.asPickerCtrl.abilities.forEach(function (element) {
+      expect(element.points).toEqual(8);
+    });
+  });
+
+  it('should reset points remaining to 27 on reset', function () {
+    scope.asPickerCtrl.pointsRemaining = 3;
+
+    scope.asPickerCtrl.resetForm();
+
+    expect(scope.asPickerCtrl.pointsRemaining).toEqual(27);
+  });
+
+  it('should set selectables to default of [8 ~ 15]', function () {
+    scope.asPickerCtrl.abilities.forEach(function (element) {
+      element.selectable = [8, 9, 10, 11, 12];
+    });
+
+    scope.asPickerCtrl.resetForm();
+
+    scope.asPickerCtrl.abilities.forEach(function (element) {
+      expect(element.selectable).toEqual([8, 9, 10, 11, 12, 13, 14, 15]);
+    });
+  });
 });
